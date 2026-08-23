@@ -1,0 +1,412 @@
+/* -----------------------------------------
+   SVMS BHEEMA BUS THEME (NIGHT STREET)
+   Works with existing Dashboard.jsx as-is
+------------------------------------------ */
+
+:root {
+  --bus-black: #05060a;
+  --bus-black-soft: #0b0d14;
+  --bus-white: #ffffff;
+  --bus-yellow: #ffd32a;
+  --bus-yellow-dark: #e0b616;
+  --bus-green: #16c172;
+  --bus-blue-glow: #0047ff;
+  --text-main: #f9fafb;
+  --text-muted: #c3cad9;
+  --border-soft: #252a3a;
+  --danger: #ff5c5c;
+  --shadow-strong: 0 20px 50px rgba(0, 0, 0, 0.9);
+}
+
+/* basic reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: var(--bus-black);
+  color: var(--text-main);
+}
+
+/* -------- LAYOUT -------- */
+
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  gap: 24px;
+  padding: 24px 28px;
+  position: relative;
+  overflow-x: hidden;
+
+  /* Night road + building hint */
+  background:
+    linear-gradient(180deg, #121624 0, #05060a 50%, #020307 100%);
+  animation: fadeIn 0.55s ease-out;
+}
+
+/* road glow under bus */
+.dashboard::before {
+  content: "";
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: 0;
+  height: 120px;
+  background:
+    radial-gradient(circle at center, #1f2937 0, #020307 55%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* neon street light glow */
+.dashboard::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 55%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 127, 0.4), transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.main-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.6s ease-out;
+}
+
+.chart-container {
+  flex: 1.1;
+  background: linear-gradient(135deg, #0c1020, #02040b);
+  border-radius: 22px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow-strong);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.65s ease-out;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+}
+
+/* blue “interior light” glow on chart container */
+.chart-container::before {
+  content: "";
+  position: absolute;
+  inset: 10px 10px auto 10px;
+  height: 5px;
+  border-radius: 999px;
+  background: radial-gradient(circle at center, #2f5cff, transparent 65%);
+  opacity: 0.9;
+}
+
+.chart-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 1);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* -------- HEADER -------- */
+
+.text-2xl {
+  font-size: 1.7rem;
+}
+
+.font-bold {
+  font-weight: 800;
+}
+
+.text-gray-800 {
+  color: var(--text-main) !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+/* yellow lightning underline */
+.text-gray-800::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 130px;
+  height: 5px;
+  border-radius: 999px;
+  background-image: linear-gradient(
+    135deg,
+    var(--bus-yellow) 0,
+    var(--bus-yellow) 40%,
+    transparent 40%,
+    transparent 55%,
+    var(--bus-yellow) 55%,
+    var(--bus-yellow) 100%
+  );
+}
+
+/* greeting span in header */
+header span {
+  color: var(--text-muted) !important;
+}
+
+/* logout button (override inline) */
+header button {
+  background-color: var(--bus-yellow) !important;
+  color: #111827 !important;
+  border-radius: 999px !important;
+  border: 1px solid #facc15 !important;
+  padding: 8px 18px !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: 0 14px 30px rgba(250, 204, 21, 0.6);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease, border-color 0.2s ease;
+}
+
+header button:hover {
+  background-color: var(--bus-yellow-dark) !important;
+  border-color: #facc15 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 45px rgba(250, 204, 21, 0.8);
+}
+
+header button:active {
+  transform: scale(0.96);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.85);
+}
+
+/* -------- CARDS (form, filter, list) -------- */
+
+.main-content > *:not(header) {
+  background: var(--bus-white);
+  color: #111827;
+  border-radius: 24px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-strong);
+  border: 1px solid #e5e7eb;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+/* diagonal stripe like bus side */
+.main-content > *:not(header)::before {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: -40px;
+  width: 120px;
+  height: 200%;
+  transform: rotate(18deg);
+  background-image: linear-gradient(
+    135deg,
+    var(--bus-black) 0 35%,
+    var(--bus-yellow) 35% 55%,
+    var(--bus-black) 55% 100%
+  );
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.main-content > *:not(header):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.95);
+  border-color: #d1d5db;
+}
+
+/* Filter title */
+.my-4 h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* -------- UTILITY FROM JSX -------- */
+
+.block {
+  display: block;
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-gray-300 {
+  border-color: #d1d5db;
+}
+
+.rounded {
+  border-radius: 10px;
+}
+
+/* -------- DATE INPUTS -------- */
+
+input[type="date"].p-1 {
+  background: #f3f4f6;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 7px 12px;
+  font-size: 0.88rem;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease, transform 0.12s ease;
+}
+
+input[type="date"].p-1:focus {
+  background: #ffffff;
+  border-color: var(--bus-yellow-dark);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.45);
+  transform: translateY(-1px);
+}
+
+/* -------- FILTER BUTTON -------- */
+
+.bg-blue-500 {
+  background-color: var(--bus-black-soft);
+}
+
+.text-white {
+  color: #f9fafb;
+}
+
+.hover\:bg-blue-600:hover {
+  background-color: #020617;
+}
+
+.ml-2.p-2.bg-blue-500.text-white.rounded {
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: 1px solid #4b5563;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  position: relative;
+}
+
+/* lightning accent */
+.ml-2.p-2.bg-blue-500.text-white.rounded::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -4px;
+  height: 3px;
+  border-radius: 999px;
+  background-image: linear-gradient(
+    135deg,
+    var(--bus-yellow) 0,
+    var(--bus-yellow) 40%,
+    transparent 40%,
+    transparent 55%,
+    var(--bus-yellow) 55%,
+    var(--bus-yellow) 100%
+  );
+  opacity: 0.9;
+}
+
+.ml-2.p-2.bg-blue-500.text-white.rounded:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 1);
+}
+
+.ml-2.p-2.bg-blue-500.text-white.rounded:active {
+  transform: scale(0.95);
+}
+
+/* -------- ERROR TEXT -------- */
+
+.text-red-500 {
+  color: var(--danger) !important;
+  font-size: 0.9rem;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* -------- CHART AREA -------- */
+
+.chart-container canvas {
+  max-height: 320px;
+}
+
+/* -------- ANIMATIONS -------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------- RESPONSIVE -------- */
+
+@media (max-width: 960px) {
+  .dashboard {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .chart-container {
+    width: 100%;
+  }
+}
+
+/* ----------------------------------------------------
+   YELLOW GRAPH THEME (ONLY ADDITION — NO OTHER CHANGES)
+----------------------------------------------------- */
+
+.chart-container canvas {
+  filter: hue-rotate(65deg) saturate(3) brightness(1.25);
+  mix-blend-mode: screen;
+}

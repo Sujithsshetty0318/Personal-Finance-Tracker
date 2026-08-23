@@ -1,0 +1,163 @@
+/* ---------- LOGIN / SIGNUP – SVMS BHEEMA THEME ---------- */
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background:
+    linear-gradient(180deg, #f2f2f1 0%, #05060a 55%, #ffaa00 100%);
+  color: #f9fafb;
+}
+
+/* title: PERSONAL FINANCE TRACKER */
+.auth-title {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f9fafb;
+  margin-bottom: 18px;
+  text-align: center;
+  position: relative;
+}
+
+.auth-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 4px;
+  border-radius: 999px;
+  background-image: linear-gradient(
+    135deg,
+    #ffd32a 0,
+    #ffd32a 45%,
+    transparent 45%,
+    transparent 60%,
+    #ffd32a 60%,
+    #ffd32a 100%
+  );
+}
+
+/* card */
+.auth-box {
+  width: 100%;
+  max-width: 420px;
+  background: #05060a;
+  border-radius: 22px;
+  padding: 22px 24px;
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
+  border: 1px solid #252a3a;
+  position: relative;
+  overflow: hidden;
+}
+
+/* diagonal yellow/black stripe like bus */
+.auth-box::before {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: -40px;
+  width: 110px;
+  height: 200%;
+  transform: rotate(18deg);
+  background-image: linear-gradient(
+    135deg,
+    #05060a 0 35%,
+    #ffd32a 35% 55%,
+    #05060a 55% 100%
+  );
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.auth-box form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1;
+}
+
+.auth-box label {
+  font-weight: bolder;
+  font-size: 0.9rem;
+  color: #030303;
+}
+
+.auth-box input {
+  padding: 9px 11px;
+  border-radius: 999px;
+  border: 1px solid #4b5563;
+  font-size: 0.95rem;
+  background: #fefefd;
+  color: black;
+  outline: none;
+  
+}
+
+.auth-box input:focus {
+  border-color: #ffd32a;
+  box-shadow: 0 0 0 2px rgba(255, 211, 42, 0.45);
+  transform: translateY(-1px);
+}
+
+/* primary button */
+.auth-box button {
+  margin-top: 6px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: radial-gradient(circle at 30% 0%, #fff7c2 0, #ffd32a 45%, #e0b616 100%);
+  color: #111827;
+  box-shadow: 0 16px 36px rgba(255, 211, 42, 0.7);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.auth-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px rgba(255, 211, 42, 0.85);
+  filter: brightness(1.02);
+}
+
+.auth-box button:active {
+  transform: scale(0.96);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.9);
+}
+
+/* footer text / signup link */
+.auth-footer {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: #c3cad9;
+}
+
+.auth-footer a {
+  color: #ffd32a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* error message */
+.auth-error {
+  margin-top: 4px;
+  color: #ff5c5c;
+  font-size: 0.85rem;
+}
